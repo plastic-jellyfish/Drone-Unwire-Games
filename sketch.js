@@ -54,7 +54,7 @@ function draw() {
 
 function _Menu(){
   overlay.classList.add('show')
-
+  // dots();
   let droneButton = createButton('Feeling Dull...');
   droneButton.style('background','#fff')
   droneButton.style('font-size','20px')
@@ -81,6 +81,16 @@ function _Menu(){
     _Wired();
   })
 }
+
+// function dots(){
+//   for( let i=0; i< width; i+=20){
+//     for(let j=0; j<height; j+=20){
+//       fill(255)
+//       noStroke()
+//       ellipse(i,j,5,5)
+//     }
+//   }
+// }
 
 //******************************************************************************************//
 //***********************************DRONE************************************************//
@@ -156,7 +166,7 @@ function _Drone() {
     reset.style('font-size','20px')
     reset.style('border','0')
     reset.style('padding','25px')
-    reset.position(_width/2-120, _height/2-100)
+    reset.position(_width/2-120, _height/2-200)
     reset.style('width','200px')
     reset.style('height','400px')
     reset.style('box-shadow', '10px 10px #000')
@@ -166,7 +176,7 @@ function _Drone() {
     yes.style('font-size','20px')
     yes.style('border','0')
     yes.style('padding','25px')
-    yes.position(_width/2-50, _height/2+100)
+    yes.position(_width/2-50, _height/2+00)
     yes.style('width','100px')
     // yes.style('height','400px')
     yes.style('box-shadow', '2px 2px #000')
@@ -180,7 +190,7 @@ function _Drone() {
     no.style('font-size','20px')
     no.style('border','0')
     no.style('padding','25px')
-    no.position(_width/2-50, _height/2+200)
+    no.position(_width/2-50, _height/2+100)
     no.style('width','100px')
     // yes.style('height','400px')
     no.style('box-shadow', '2px 2px #000')
@@ -474,7 +484,7 @@ function _Wired() {
     reset.style('font-size','20px')
     reset.style('border','0')
     reset.style('padding','25px')
-    reset.position(width/2-120, _height/2-100)
+    reset.position(width/2-120, _height/2-200)
     reset.style('width','200px')
     reset.style('height','400px')
     reset.style('box-shadow', '10px 10px #000')
@@ -484,7 +494,7 @@ function _Wired() {
     yes.style('font-size','20px')
     yes.style('border','0')
     yes.style('padding','25px')
-    yes.position(_width/2-50, _height/2+100)
+    yes.position(_width/2-50, _height/2+00)
     yes.style('width','100px')
     // yes.style('height','400px')
     yes.style('box-shadow', '2px 2px #000')
@@ -498,7 +508,7 @@ function _Wired() {
     no.style('font-size','20px')
     no.style('border','0')
     no.style('padding','25px')
-    no.position(_width/2-50, _height/2+200)
+    no.position(_width/2-50, _height/2+100)
     no.style('width','100px')
     // yes.style('height','400px')
     no.style('box-shadow', '2px 2px #000')
