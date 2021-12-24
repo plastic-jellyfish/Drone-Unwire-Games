@@ -7,14 +7,14 @@ html, body {
 
 .parent{
   display: grid;
-  grid-template-columns: 30vw 65vw 5vw;
-  grid-template-rows: 20vh 60vh 20vh; 
+  grid-template-columns: 30vw 70vw;
+  grid-template-rows: 15vh 70vh 15vh; 
   justify-content: space-around;
 }
 
 .child{
   /* border: 3px solid #333; */
-  background-color: #000;  
+  /* background-color: #000;   */
 }
 
 .container0{
@@ -30,7 +30,7 @@ h1{
 }
 
 .container1{
-  grid-column: span 2;
+  grid-column: span 1;
   /* padding: 1em; */
   /* margin: .1em; */
 }
@@ -42,20 +42,13 @@ p{
 }
 
 .container2{
-  grid-column: span 1;
-}
-.container3{
   width: 100%;
   height: auto;
-  grid-column: span 3;
+  grid-column: span 2;
 }
 
-.container4{
-  grid-column: span 1;
-}
-
-.container5{
-  grid-column: span 3;
+.container3{
+  grid-column: span 2;
   justify-self: center; 
 }
 
