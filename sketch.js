@@ -23,6 +23,7 @@ let numPower =1;
 let activePower=0;
 let font, font1;
 let overlay = document.querySelector('.overlay')
+let dShow=0,wShow=0;
 
 function preload() {
     font = loadFont('assets/ZillaSlab-Regular.ttf');
@@ -64,6 +65,7 @@ function _Menu(){
   droneButton.style('box-shadow', '10px 10px #000')
   droneButton.mousePressed(() => {
     restartDrone();
+    dShow=1;
     _Drone();
   })
 
@@ -77,6 +79,7 @@ function _Menu(){
   unwireButton.style('box-shadow', '10px 10px #000')
   unwireButton.mousePressed(() => {
     restartWired();
+    wShow=1;
     _Wired();
   })
 }
@@ -97,6 +100,13 @@ function _Drone() {
   let bg1 = document.querySelector('.parent')
   bg1.classList.add('drone')
   
+  let dOverlay = document.querySelector('.droneOverlay')
+  if(dShow ==1) dOverlay.classList.add('show')
+  dOverlay.addEventListener('click' , () => {
+    dOverlay.classList.remove('show')
+    dShow =0;
+  })
+
   _DroneFlag = 1;
   background(10);
   buildings();
@@ -150,6 +160,7 @@ function _Drone() {
 
   if (fear>=100) {
     overlay.classList.add('show')
+    dOverlay.classList.remove('show')
     let reset = createP('Dull Day & Fine Job! You killed '+devkill+' Deviants & '+civilian+' Civilians today.\n Continue working Next Shift?');
     reset.style('background','#0050ff')
     reset.style('font-size','20px')
@@ -231,7 +242,7 @@ function restartDrone() {
   s = width;
   textFont(font);
   textSize(12);
-  fear = 98;
+  fear = 90;
   rectMode(CORNERS);
 
   // _people = new People[numPeople];
@@ -430,6 +441,13 @@ function _Wired() {
   let bg = document.querySelector('.parent')
   bg.classList.add('wired')
 
+  let wOverlay = document.querySelector('.wiredOverlay')
+  if(wShow == 1) wOverlay.classList.add('show')
+  wOverlay.addEventListener('click', () => {
+    wOverlay.classList.remove('show')
+    wShow = 0;
+  })
+
   background(150);
   _WiredFlag = 1;
   if (activePower>0) {
@@ -448,10 +466,11 @@ function _Wired() {
     }
     fill(0, 150);
     noStroke();
-    rect(mouseX, mouseY, 40, 15, 10);
+    rect(mouseX, mouseY, 30, 15, 10);
     stroke(250);
     fill(0, 0, 255);
-    ellipse(mouseX, mouseY, 20, 20);
+    // ellipse(mouseX, mouseY, 20, 20);
+    rect(mouseX, mouseY, 20, 20);
   }
   else {
     for (let j =0 ; j<numPower;j++) {
@@ -468,7 +487,8 @@ function _Wired() {
     ellipse(mouseX, mouseY, 20, 20);
 
     overlay.classList.add('show')
-    let reset = createP('Good Job! The Reds are destructed and you have unwired all them. Un-wire more?');
+    wOverlay.classList.remove('show')
+    let reset = createP('Good Job! The Red Circles are destructed and you have unwired all the Yellows. Want to Un-wire more?');
     reset.style('background','#0050ff')
     reset.style('font-size','20px')
     reset.style('border','0')
@@ -605,7 +625,7 @@ class PeopleYellow {
     if (this.life==1) {
       fill(0, 150);
       noStroke();
-      rect(this.x, this.y, 40, 15, 10);
+      // rect(this.x, this.y, 40, 15, 10);
 
       if (this.wired==1) {
         fill(255, 255, 0, 200);
@@ -617,7 +637,8 @@ class PeopleYellow {
       }
 
       strokeWeight(2);
-      ellipse(this.x, this.y, 20, 20);
+      // ellipse(this.x, this.y, 20, 20);
+      triangle(this.x-15,this.y+15,this.x+15,this.y+15,this.x,this.y-10);
     }
   }
 }

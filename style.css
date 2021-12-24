@@ -134,11 +134,47 @@ p{
   100%{background-position:0% 50%}
 }
 
+.droneOverlay,
+.wiredOverlay{
+  opacity: 1;
+  position: absolute;
+  /* z-index: -1; */
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: auto;
+  background: #0050ff;
+  border: 10px 10px black;
+}
 
+.droneOverlay,
+.wiredOverlay,
 .overlay{
   display: none;
 }
 
+.droneOverlay.show,
+.wiredOverlay.show,
 .overlay.show{
   display: block;
+}
+
+h2{
+  font-family: "kanit light";
+  font-size: 1.2em;
+  color: antiquewhite;
+  padding: 2em;
+  border: 1em;
+  font-weight: normal;
+}
+
+.start{
+  font-size: 1.2em;
+  margin: 1em;  
+  padding: 2em;
+  background-color: #0050ff;
+  border: 2px;
+  color: antiquewhite;
+  justify-self:center;
+  text-decoration: underline;
 }
