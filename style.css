@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #000;  
-  font-family: "Zilla Slab";
+  /* font-family: "Zilla Slab"; */
 }
 
 .parent{
@@ -10,6 +10,14 @@ html, body {
   grid-template-columns: 30vw 70vw;
   grid-template-rows: 15vh 70vh 15vh; 
   justify-content: space-around;
+}
+
+.parent.drone{
+  background-color: black;
+}
+
+.parent.wired{
+  background-color:#06af6e;
 }
 
 .child{
@@ -25,7 +33,7 @@ html, body {
 
 h1{
   font-size: 1.2rem;
-  color: #0050ff;
+  /* color: #01277a; */
   /* color: #02458880; */
 }
 
@@ -74,4 +82,52 @@ p{
   background-color: #6903196b;
   color: #f7e815;
   box-shadow: 0px 0px rgba(250, 208, 208, 0.39);
+}
+
+#droneTitle, 
+#wiredTitle,
+#droneText,
+#wiredText{
+  display: none;
+}
+
+#droneTitle.show, 
+#droneText.show{
+  display: inherit;
+  color:cornsilk;
+  font-family: "Zilla Slab";
+}
+
+#wiredTitle.show,
+#wiredText.show{
+  display: inherit;
+  color: #01277a;
+  font-family: "kanit light";
+}
+
+.Shoot{
+  display: none;
+}
+
+.Shoot.show{
+  display: inherit;
+}
+
+.overlay{
+  opacity: 1;
+  position: absolute;
+  /* z-index: 1; */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(250, 225, 2, 0.692);
+}
+
+.overlay{
+  display: none;
+}
+
+.overlay.show{
+  display: block;
 }

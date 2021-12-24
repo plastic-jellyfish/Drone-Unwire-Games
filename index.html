@@ -15,11 +15,18 @@
 
   <body>
     <div class="parent">
-        <div class="child container0"><h1><i class="fas fa-fighter-jet"></i> Drone Operator</h1></div>
+        <div class="child container0">
+          <h1 id='droneTitle'><i class="fas fa-fighter-jet"></i> Drone Operator</h1>
+          <h1 id='wiredTitle'><i class="fas fa-asterisk"></i> Un-Wire</h1>
+        </div>
         <div class="child container1">
-          <p>Low Social Credit Deviants are hiding among the normal Citizens in the public. 
+          <p id="droneText">Low Social Credit Deviants are hiding among the normal Citizens in the public. 
             You are the Drone operator with a scanner Gun. 
             Your daily job is to kill the deviants before the Anixety level reaches max.
+          </p>
+          <p id="wiredText">The Reds have kept the Yellows wired to thier ideals. Its time to Un-Wire them.
+            You are the blue, interact & organise 4 yellows 
+            and destruct all the Reds before the time runs out. All the Best!
           </p>
         </div>
         <div class="child container2" id="drone"></div>
@@ -29,6 +36,7 @@
           <!-- <button class="Right btn"><i class="fas fa-angle-right"></i></button> -->
         </div>
     </div>
+    <div class="overlay"></div>
     <!-- <canvas class="p5sketch"></canvas> -->
     <script src="sketch.js"></script>
  </body>

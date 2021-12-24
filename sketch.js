@@ -22,7 +22,7 @@ let activeYellow;
 let numPower =1;
 let activePower=0;
 let font, font1;
-
+let overlay = document.querySelector('.overlay')
 
 function preload() {
     font = loadFont('assets/ZillaSlab-Regular.ttf');
@@ -53,11 +53,8 @@ function draw() {
 //******************************************************************************************//
 
 function _Menu(){
-  let menuPanel = createDiv();
-  menuPanel.style('background','#000')
-  menuPanel.size(_width, 1.4*_height)
-  menuPanel.position(0,0)
-     
+  overlay.classList.add('show')
+
   let droneButton = createButton('Feeling Dull...');
   droneButton.style('background','#fff')
   droneButton.style('font-size','20px')
@@ -91,7 +88,16 @@ function _Menu(){
 
 function _Drone() {
   removeElements()
-  console.log('DRONE_ENTERED')
+  overlay.classList.remove('show')
+  let title1 = document.getElementById('droneTitle')
+  title1.classList.add('show')
+  let text1 = document.getElementById('droneText')
+  text1.classList.add('show')
+  let press = document.querySelector('.Shoot')
+  press.classList.add('show')
+  let bg1 = document.querySelector('.parent')
+  bg1.classList.add('drone')
+  
   _DroneFlag = 1;
   background(10);
   buildings();
@@ -144,25 +150,23 @@ function _Drone() {
   }
 
   if (fear>=100) {
+    overlay.classList.add('show')
     let reset = createP('Dull Day & Fine Job! You killed '+devkill+' Deviants & '+civilian+' Civilians today.\n Continue working Next Shift?');
     reset.style('background','#0050ff')
     reset.style('font-size','20px')
     reset.style('border','0')
     reset.style('padding','25px')
-    reset.position(_width/2-120, _height/2+50)
+    reset.position(_width/2-120, _height/2-100)
     reset.style('width','200px')
     reset.style('height','400px')
     reset.style('box-shadow', '10px 10px #000')
-    reset.mousePressed(() => {
-      restartDrone();
-      _Drone();
-    })
+
     let yes = createButton('YES');
     yes.style('background','#fff')
     yes.style('font-size','20px')
     yes.style('border','0')
     yes.style('padding','25px')
-    yes.position(_width/2-50, _height/2+250)
+    yes.position(_width/2-50, _height/2+100)
     yes.style('width','100px')
     // yes.style('height','400px')
     yes.style('box-shadow', '2px 2px #000')
@@ -176,12 +180,17 @@ function _Drone() {
     no.style('font-size','20px')
     no.style('border','0')
     no.style('padding','25px')
-    no.position(_width/2-50, _height/2+350)
+    no.position(_width/2-50, _height/2+200)
     no.style('width','100px')
     // yes.style('height','400px')
     no.style('box-shadow', '2px 2px #000')
     no.mousePressed(() => {
       removeElements()
+      title1.classList.remove('show')
+      text1.classList.remove('show')
+      press.classList.remove('show')
+      bg1.classList.remove('drone')
+      overlay.classList.add('show')
       _DroneFlag =0;
     })
 
@@ -414,31 +423,14 @@ function drone() {
 
 function _Wired() {
   removeElements()
-  let topPanel = createDiv();
-  topPanel.style('background','#555')
-  topPanel.size(_width, .215*_height)
-  topPanel.position(0,0)
-  
-  let bottomPanel = createDiv();
-  bottomPanel.style('background','#555')
-  bottomPanel.size(_width, .21*_height)
-  bottomPanel.position(0,1.215*_height)
-     
-  let wireText = createP('The Reds have kept the Yellows wired to thier ideals. Its time to Un-Wire them.'+
-  'You are the blue, interact & organise 4 yellows and destruct all the Reds before the time runs out.'+ 
-  'All the Best!');
-  wireText.position(_width/2 - 100, 2)
-  wireText.style('width','300px')
-  wireText.style('font',font1)
+  overlay.classList.remove('show')
+  let title = document.getElementById('wiredTitle')
+  title.classList.add('show')
+  let text = document.getElementById('wiredText')
+  text.classList.add('show')
+  let bg = document.querySelector('.parent')
+  bg.classList.add('wired')
 
-  let title = createDiv('UN-WIRE');
-  title.style('background','#fff')
-  title.style('font-size','20px')
-  title.position(10, 50)
-  title.style('width','90px')
-  title.style('padding','5px')
-  title.style('box-shadow', '5px 5px #000')
-  
   background(150);
   _WiredFlag = 1;
   if (activePower>0) {
@@ -476,25 +468,23 @@ function _Wired() {
     fill(0, 0, 255);
     ellipse(mouseX, mouseY, 20, 20);
 
+    overlay.classList.add('show')
     let reset = createP('Good Job! The Reds are destructed and you have unwired all them. Un-wire more?');
     reset.style('background','#0050ff')
     reset.style('font-size','20px')
     reset.style('border','0')
     reset.style('padding','25px')
-    reset.position(_width/2-120, _height/2+50)
+    reset.position(width/2-120, _height/2-100)
     reset.style('width','200px')
     reset.style('height','400px')
     reset.style('box-shadow', '10px 10px #000')
-    reset.mousePressed(() => {
-      restartWired();
-      _Wired();
-    })
+
     let yes = createButton('YES');
     yes.style('background','#fff')
     yes.style('font-size','20px')
     yes.style('border','0')
     yes.style('padding','25px')
-    yes.position(_width/2-50, _height/2+250)
+    yes.position(_width/2-50, _height/2+100)
     yes.style('width','100px')
     // yes.style('height','400px')
     yes.style('box-shadow', '2px 2px #000')
@@ -508,12 +498,15 @@ function _Wired() {
     no.style('font-size','20px')
     no.style('border','0')
     no.style('padding','25px')
-    no.position(_width/2-50, _height/2+350)
+    no.position(_width/2-50, _height/2+200)
     no.style('width','100px')
     // yes.style('height','400px')
     no.style('box-shadow', '2px 2px #000')
     no.mousePressed(() => {
       removeElements()
+      title.classList.remove('show')
+      text.classList.remove('show')
+      bg.classList.remove('wired')
       _WiredFlag =0;
     })
 
