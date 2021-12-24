@@ -68,7 +68,7 @@ p{
   font-size: 2em;
   /* padding: 1em 1em; */
   margin: .5em;
-  background-color: #1128f881;
+  background-color: #053ef8b6;
   border: none;
   color: rgb(204, 202, 202);
   font-weight: bold;
@@ -143,7 +143,7 @@ p{
   left: 10%;
   width: 80%;
   height: auto;
-  background: #0050ff;
+  background: #001274;
   border: 10px 10px black;
 }
 
@@ -172,7 +172,7 @@ h2{
   font-size: 1.2em;
   margin: 1em;  
   padding: 2em;
-  background-color: #0050ff;
+  background-color: #001274;
   border: 2px;
   color: antiquewhite;
   justify-self:center;

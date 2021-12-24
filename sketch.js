@@ -19,7 +19,7 @@ let numYellow =10;
 let savedTime1 = 0;
 let activeYellow;
 // let totalTime = 1000;
-let numPower =1;
+let numPower =5;
 let activePower=0;
 let font, font1;
 let overlay = document.querySelector('.overlay')
@@ -242,7 +242,7 @@ function restartDrone() {
   s = width;
   textFont(font);
   textSize(12);
-  fear = 90;
+  fear = 0;
   rectMode(CORNERS);
 
   // _people = new People[numPeople];
