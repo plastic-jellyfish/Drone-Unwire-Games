@@ -2,7 +2,6 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #000;  
-  /* font-family: "Zilla Slab"; */
 }
 
 .parent{
@@ -163,7 +162,6 @@ h2{
   color: rgb(248, 224, 192);
   padding: 2em;
   border: 1em;
-  font-weight: lighter;
 }
 
 .start{
@@ -184,3 +182,14 @@ h2{
  bottom: .5em;
  color: #1f1e1e; 
 }
+
+.mood{
+  font-family: "zilla slab";
+  font-size: 1.5em;
+  position: absolute;
+  left: 10%;
+  top: 3em;
+  text-align: center;
+  /* justify-self: center;  */
+  color: #fa0053; 
+ }

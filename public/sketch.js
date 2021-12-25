@@ -15,10 +15,8 @@ let _peopleYellow = [];
 let _power = [];
 let sc=0;
 let numYellow =10;
-// let savedTime = 0;
 let savedTime1 = 0;
 let activeYellow;
-// let totalTime = 1000;
 let numPower =5;
 let activePower=0;
 let font, font1;
@@ -41,7 +39,9 @@ function windowResized() {
     _width = select(".container2").width;
     _height = select(".container2").height;
     resizeCanvas(_width, _height);
-    // restart();
+    if((_DroneFlag == 0) && (_WiredFlag == 0)) _Menu();
+    if(_DroneFlag == 1) _Drone();
+    if(_WiredFlag == 1) _Wired();
 }
 
 function draw() {
@@ -54,6 +54,7 @@ function draw() {
 //******************************************************************************************//
 
 function _Menu(){
+  removeElements()
   overlay.classList.add('show')
   let droneButton = createButton('Feeling Dull...');
   droneButton.style('background','#fff')
@@ -450,6 +451,7 @@ function _Wired() {
 
   background(150);
   _WiredFlag = 1;
+  
   if (activePower>0) {
     for (let j =0 ; j<numPower;j++) {
       _power[j].display();
@@ -464,6 +466,7 @@ function _Wired() {
       _peopleYellow[i].display();
       _peopleYellow[i].move();
     }
+
     fill(0, 150);
     noStroke();
     rect(mouseX, mouseY, 30, 15, 10);
@@ -528,8 +531,6 @@ function _Wired() {
       bg.classList.remove('wired')
       _WiredFlag =0;
     })
-
-
   }
 }
 
