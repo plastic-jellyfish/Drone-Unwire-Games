@@ -214,3 +214,79 @@ p{
 .share.show{
   display: block;
 }
+
+.loader-wrapper{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  left:0;
+  /* background-color: darkseagreen; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: repeating-linear-gradient(45deg, hsl(64,83%,66%) 0px, hsl(64,83%,66%) 6px,hsl(109,83%,66%) 6px, hsl(109,83%,66%) 12px,hsl(154,83%,66%) 12px, hsl(154,83%,66%) 18px,hsl(199,83%,66%) 18px, hsl(199,83%,66%) 24px,hsl(244,83%,66%) 24px, hsl(244,83%,66%) 30px,hsl(289,83%,66%) 30px, hsl(289,83%,66%) 36px,hsl(334,83%,66%) 36px, hsl(334,83%,66%) 42px,hsl(19,83%,66%) 42px, hsl(19,83%,66%) 48px);
+  background-size: 200% 200%;
+  animation: AnimationName 60s ease infinite;
+}
+
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  25% {
+    transform: rotate(180deg);
+  }
+  
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  75% {
+    transform: rotate(360deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+  
+  25% {
+    height: 0%;
+  }
+  
+  50% {
+    height: 100%;
+  }
+  
+  75% {
+    height: 100%;
+  }
+  
+  100% {
+    height: 0%;
+  }
+}
