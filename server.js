@@ -5,8 +5,8 @@ const TelegramBot = require("node-telegram-bot-api");
 const TOKEN = process.env.TOKEN;
 const bot = new TelegramBot(TOKEN, { polling: true } );
 const gameName = process.env.GAMENAME;
-// let url = 'https://vibrato-app.herokuapp.com/';
-let url = 'http://localhost:5000/'
+let url = 'https://dull-and-disorder.herokuapp.com/';
+// let url = 'http://localhost:5000/'
 const app = express()
 
 app.use(express.json())
