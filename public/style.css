@@ -190,6 +190,21 @@ h2{
   left: 10%;
   top: 3em;
   text-align: center;
-  /* justify-self: center;  */
   color: #fa0053; 
  }
+
+ .share{
+  font-size: 20px;
+  position: absolute;
+  left: 25%;
+  bottom: 25%;
+  border: 0;
+  padding: 25px;
+  box-shadow: 10px 10px black;
+  color:black; 
+  justify-self: center; 
+  background-color: rgb(255, 255, 255);
+  width: 200px;
+}
+
+/* droneButton.position(_width/2-120, _height/2-50) */

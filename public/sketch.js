@@ -61,7 +61,7 @@ function _Menu(){
   droneButton.style('font-size','20px')
   droneButton.style('border','0')
   droneButton.style('padding','25px')
-  droneButton.position(_width/2-120, _height/2-50)
+  droneButton.position(.25*_width, _height/2-50)
   droneButton.style('width','200px')
   droneButton.style('box-shadow', '10px 10px #000')
   droneButton.mousePressed(() => {
@@ -75,7 +75,7 @@ function _Menu(){
   unwireButton.style('font-size','20px')
   unwireButton.style('border','0')
   unwireButton.style('padding','25px')
-  unwireButton.position(_width/2-120, _height/2+100)
+  unwireButton.position(.25*_width, _height/2+100)
   unwireButton.style('width','200px')
   unwireButton.style('box-shadow', '10px 10px #000')
   unwireButton.mousePressed(() => {
