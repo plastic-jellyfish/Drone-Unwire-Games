@@ -23,17 +23,20 @@ let font, font1;
 let overlay = document.querySelector('.overlay')
 let share = document.querySelector('.share')
 let dShow=0,wShow=0;
+// global.score = 0;
 
 function preload() {
     font = loadFont('assets/ZillaSlab-Regular.ttf');
     font1 = loadFont('assets/Kanit-Light.ttf');
     _width = select(".container2").width;
     _height = select(".container2").height;
+    score = 0;
 }
 
 function setup() {
   var drone = createCanvas(_width,_height);  
   drone.parent('drone');
+  console.log(score);
 }
 
 function windowResized() {
@@ -49,6 +52,15 @@ function draw() {
   if((_DroneFlag == 0) && (_WiredFlag == 0)) _Menu();
   if(_DroneFlag == 1) _Drone();
   if(_WiredFlag == 1) _Wired();
+
+  select(".share").touchStarted(()=>{
+    TelegramGameProxy.shareScore()
+    console.log("gameOver"+score)
+  })
+  select(".share").mousePressed(()=>{
+    console.log("GameOver"+score)
+    TelegramGameProxy.shareScore()
+  })
 }
 //******************************************************************************************//
 //***********************************MENU************************************************//
@@ -181,7 +193,7 @@ function _Drone() {
     yes.style('font-size','20px')
     yes.style('border','0')
     yes.style('padding','25px')
-    yes.position(_width/2-50, _height/2+00)
+    yes.position(_width/2-50, _height/2)
     yes.style('width','100px')
     // yes.style('height','400px')
     yes.style('box-shadow', '2px 2px #000')
@@ -208,7 +220,7 @@ function _Drone() {
       overlay.classList.add('show')
       _DroneFlag =0;
     })
-
+    console.log(score)
   }
 
   fill(0);
@@ -413,12 +425,14 @@ function drone() {
           if ((_people[i].x >= (dronex-_people[i].head)) && (_people[i].x <= (dronex+_people[i].head))) {
             if ((_people[i].deviant == 1) && (_people[i].life==1)) {
               devkill=devkill+1;
+              score +=1;
               if (fear>10) {
                 fear=fear-1;
               }
             }
             else if ((_people[i].deviant == 0) && (_people[i].life==1)) {
               civilian=civilian+1;
+              score +=1;
               fear=fear+1;
             }
             _people[i].kill();
@@ -510,7 +524,7 @@ function _Wired() {
     yes.style('font-size','20px')
     yes.style('border','0')
     yes.style('padding','25px')
-    yes.position(_width/2-50, _height/2+00)
+    yes.position(_width/2-50, _height/2)
     yes.style('width','100px')
     // yes.style('height','400px')
     yes.style('box-shadow', '2px 2px #000')
@@ -590,6 +604,7 @@ class PeopleYellow {
           this.wired=0;
           savedTime = millis(); // Save the current time to restart the timer!
           // console.log(savedTime)
+          score += 1;
         }
       }
       else {
@@ -726,6 +741,8 @@ class Power {
             }
             activeYellow=0;
             activePower=activePower-1;
+            score+=10;
+            console.log(score);
           }
         }
       }

@@ -8,6 +8,8 @@ const gameName = process.env.GAMENAME;
 let url = 'https://dull-and-disorder.herokuapp.com/';
 // let url = 'http://localhost:5000/'
 const app = express()
+let userID ='';
+global.score = 0;
 
 app.use(express.json())
 app.use(express.static('public'))
@@ -20,7 +22,15 @@ bot.onText(/\/start/, function onPhotoText(msg) {
 // Handle callback queries
 bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   bot.answerCallbackQuery(callbackQuery.id, {url: url, show_alert: true});
+  userID = callbackQuery.from.id
+  console.log(userID);
+//   console.log(score);
 });
+
+// if(userID != '') {
+//     bot.setGameScore(userID,score);
+//     console.log(userID, score);
+// }
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This Game App"));
 
