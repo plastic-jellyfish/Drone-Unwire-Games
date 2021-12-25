@@ -39,13 +39,12 @@ h1{
 
 .container1{
   grid-column: span 1;
-  /* padding: 1em; */
-  /* margin: .1em; */
+  width: 100%;
+  height: auto;
 }
 
 p{
   font-size: .9rem;
-  width: 100%;
   color: rgb(219, 219, 219);
 }
 
@@ -68,7 +67,7 @@ p{
   font-size: 2em;
   /* padding: 1em 1em; */
   margin: .5em;
-  background-color: #053ef8b6;
+  background-color: #1b50fdb6;
   border: none;
   color: rgb(204, 202, 202);
   font-weight: bold;
@@ -139,12 +138,11 @@ p{
   opacity: 1;
   position: absolute;
   /* z-index: -1; */
-  top: 10%;
+  top: 20%;
   left: 10%;
   width: 80%;
   height: auto;
   background: #001274;
-  border: 10px 10px black;
 }
 
 .droneOverlay,
@@ -161,11 +159,11 @@ p{
 
 h2{
   font-family: "kanit light";
-  font-size: 1.2em;
-  color: antiquewhite;
+  font-size: 1.1em;
+  color: rgb(248, 224, 192);
   padding: 2em;
   border: 1em;
-  font-weight: normal;
+  font-weight: lighter;
 }
 
 .start{
@@ -177,4 +175,12 @@ h2{
   color: antiquewhite;
   justify-self:center;
   text-decoration: underline;
+}
+
+.info{
+ font-family: "kanit light";
+ position: absolute;
+ left: 1em;
+ bottom: .5em;
+ color: #1f1e1e; 
 }
