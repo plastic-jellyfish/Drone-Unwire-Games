@@ -21,6 +21,7 @@ let numPower =5;
 let activePower=0;
 let font, font1;
 let overlay = document.querySelector('.overlay')
+let share = document.querySelector('.share')
 let dShow=0,wShow=0;
 
 function preload() {
@@ -56,15 +57,17 @@ function draw() {
 function _Menu(){
   removeElements()
   overlay.classList.add('show')
+  share.classList.add('show')
   let droneButton = createButton('Feeling Dull...');
   droneButton.style('background','#fff')
   droneButton.style('font-size','20px')
   droneButton.style('border','0')
   droneButton.style('padding','25px')
-  droneButton.position(.25*_width, _height/2-50)
+  droneButton.position(.25*_width, .45*_height)
   droneButton.style('width','200px')
   droneButton.style('box-shadow', '10px 10px #000')
   droneButton.mousePressed(() => {
+    share.classList.remove('show')
     restartDrone();
     dShow=1;
     _Drone();
@@ -75,10 +78,11 @@ function _Menu(){
   unwireButton.style('font-size','20px')
   unwireButton.style('border','0')
   unwireButton.style('padding','25px')
-  unwireButton.position(.25*_width, _height/2+100)
+  unwireButton.position(.25*_width, .65*_height)
   unwireButton.style('width','200px')
   unwireButton.style('box-shadow', '10px 10px #000')
   unwireButton.mousePressed(() => {
+    share.classList.remove('show')
     restartWired();
     wShow=1;
     _Wired();

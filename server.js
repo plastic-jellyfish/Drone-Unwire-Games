@@ -14,7 +14,6 @@ app.use(express.static('public'))
 
 // Matches /start
 bot.onText(/\/start/, function onPhotoText(msg) {
-    // url = 'https://vibrato-app.herokuapp.com/';
     bot.sendGame(msg.chat.id, gameName);
 });
   

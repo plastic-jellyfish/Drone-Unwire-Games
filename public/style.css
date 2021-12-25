@@ -156,10 +156,10 @@ p{
   display: block;
 }
 
-h2{
+.overlayinfo{
   font-family: "kanit light";
-  font-size: 1.1em;
-  color: rgb(248, 224, 192);
+  font-size: 1.2em;
+  color:antiquewhite;
   padding: 2em;
   border: 1em;
 }
@@ -207,4 +207,10 @@ h2{
   width: 200px;
 }
 
-/* droneButton.position(_width/2-120, _height/2-50) */
+.share{
+  display: none;
+}
+
+.share.show{
+  display: block;
+}
