@@ -36,7 +36,7 @@ function preload() {
 function setup() {
   var drone = createCanvas(_width,_height);  
   drone.parent('drone');
-  console.log(score);
+  // console.log(score);
 }
 
 function windowResized() {
@@ -53,14 +53,14 @@ function draw() {
   if(_DroneFlag == 1) _Drone();
   if(_WiredFlag == 1) _Wired();
 
-  select(".share").touchStarted(()=>{
-    TelegramGameProxy.shareScore()
-    console.log("gameOver"+score)
-  })
-  select(".share").mousePressed(()=>{
-    console.log("GameOver"+score)
-    TelegramGameProxy.shareScore()
-  })
+  // select(".share").touchStarted(()=>{
+  //   TelegramGameProxy.shareScore()
+  //   console.log("gameOver"+score)
+  // })
+  // select(".share").mousePressed(()=>{
+  //   console.log("GameOver"+score)
+  //   TelegramGameProxy.shareScore()
+  // })
 }
 //******************************************************************************************//
 //***********************************MENU************************************************//
@@ -220,7 +220,7 @@ function _Drone() {
       overlay.classList.add('show')
       _DroneFlag =0;
     })
-    console.log(score)
+    // console.log(score)
   }
 
   fill(0);
@@ -742,7 +742,7 @@ class Power {
             activeYellow=0;
             activePower=activePower-1;
             score+=10;
-            console.log(score);
+            // console.log(score);
           }
         }
       }
