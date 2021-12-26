@@ -27,10 +27,12 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 //   console.log(score);
 });
 
-// if(userID != '') {
-//     bot.setGameScore(userID,score);
-//     console.log(userID, score);
-// }
+function setScore(){
+    bot.setGameScore(userID,score);
+    console.log(userID, score);
+}
+
+if (userID != '') setScore();
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This Game App"));
 

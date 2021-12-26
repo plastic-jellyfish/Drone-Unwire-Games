@@ -156,12 +156,13 @@ p{
   display: block;
 }
 
-.overlayinfo{
+.overlayinfo,
+.overlayTitle{
   font-family: "kanit light";
   font-size: 1.2em;
   color:antiquewhite;
   padding: 2em;
-  border: 1em;
+  /* border: 1em; */
 }
 
 .start{

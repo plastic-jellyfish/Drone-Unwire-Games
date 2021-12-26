@@ -23,7 +23,6 @@ let font, font1;
 let overlay = document.querySelector('.overlay')
 let share = document.querySelector('.share')
 let dShow=0,wShow=0;
-// global.score = 0;
 
 function preload() {
     font = loadFont('assets/ZillaSlab-Regular.ttf');
@@ -111,7 +110,7 @@ function _Drone() {
   let title1 = document.getElementById('droneTitle')
   title1.classList.add('show')
   let text1 = document.getElementById('droneText')
-  text1.classList.add('show')
+  if(dShow ==0) text1.classList.add('show')
   let press = document.querySelector('.Shoot')
   press.classList.add('show')
   let bg1 = document.querySelector('.parent')
@@ -456,7 +455,7 @@ function _Wired() {
   let title = document.getElementById('wiredTitle')
   title.classList.add('show')
   let text = document.getElementById('wiredText')
-  text.classList.add('show')
+  if(wShow == 0) text.classList.add('show')
   let bg = document.querySelector('.parent')
   bg.classList.add('wired')
 
