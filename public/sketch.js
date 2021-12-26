@@ -112,8 +112,9 @@ function _Drone() {
   if(dShow ==0) title1.classList.add('show')
   let text1 = document.getElementById('droneText')
   if(dShow ==0) text1.classList.add('show')
+  if(dShow ==0) resign.classList.add('show')
   let press = document.querySelector('.Shoot')
-  press.classList.add('show')
+  if(dShow ==0) press.classList.add('show')
   let bg1 = document.querySelector('.parent')
   bg1.classList.add('drone')
   
@@ -130,6 +131,9 @@ function _Drone() {
     title1.classList.remove('show')
     text1.classList.remove('show')
     bg1.classList.remove('wired')
+    press.classList.remove('show')
+    resign.classList.remove('show')
+    overlay.classList.add('show')
     _DroneFlag =0;
     _WiredFlag =0;
     console.log(_DroneFlag, _WiredFlag, score)
@@ -227,6 +231,7 @@ function _Drone() {
       text1.classList.remove('show')
       press.classList.remove('show')
       bg1.classList.remove('drone')
+      resign.classList.remove('show')
       overlay.classList.add('show')
       _DroneFlag =0;
     })
@@ -467,6 +472,7 @@ function _Wired() {
   if(wShow == 0) title.classList.add('show')
   let text = document.getElementById('wiredText')
   if(wShow == 0) text.classList.add('show')
+  if(wShow ==0) resign.classList.add('show')
   let bg = document.querySelector('.parent')
   bg.classList.add('wired')
 
@@ -483,6 +489,7 @@ function _Wired() {
   resign.addEventListener('click' , () => {
     title.classList.remove('show')
     text.classList.remove('show')
+    resign.classList.remove('show')
     bg.classList.remove('wired')
     _WiredFlag == 0;
     _DroneFlag =0;
@@ -566,6 +573,7 @@ function _Wired() {
       title.classList.remove('show')
       text.classList.remove('show')
       bg.classList.remove('wired')
+      resign.classList.remove('show')
       _WiredFlag =0;
     })
   }

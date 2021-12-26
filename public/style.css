@@ -140,7 +140,7 @@ p{
   top: 15%;
   left: 10%;
   width: 80%;
-  height: auto;
+  height: 70%;
   background: #001274;
 }
 
@@ -185,6 +185,14 @@ p{
   bottom: 5%;
   right: 5%;
   /* background: #001274; */
+}
+
+.resign-button{
+  display: none;
+}
+
+.resign-button.show{
+  display: block;
 }
 
 .resign-button{
