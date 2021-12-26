@@ -46,6 +46,7 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   console.log(userID, chatID, msgID);
 });
 
-bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This Game App"));
+bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This is a Game App"));
+bot.onText(/score/, (msg) => bot.sendMessage(msg.from.id, "Score:"+score));
 
 app.listen(process.env.PORT || 5000)
