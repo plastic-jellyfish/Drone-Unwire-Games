@@ -11,6 +11,7 @@ const app = express()
 let userID = null;
 let chatID = null;
 let msgID = null;
+let score = null;
 // userID = 1029745540;
 // chatID = 1029745540;
 // msgID = 183;
@@ -24,7 +25,7 @@ app.get('/', (req,res) => {
 })
 
 app.put('/score', (req,res) => {
-  let score = req.body.score
+  score = req.body.score
   res.json(req.body)
   if (userID != null) { 
     bot.setGameScore(userID,score,chatID,msgID); 
