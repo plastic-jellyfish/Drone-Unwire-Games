@@ -137,7 +137,7 @@ p{
   opacity: 1;
   position: absolute;
   /* z-index: -1; */
-  top: 20%;
+  top: 15%;
   left: 10%;
   width: 80%;
   height: auto;
@@ -161,7 +161,10 @@ p{
   font-family: "kanit light";
   font-size: 1.2em;
   color:antiquewhite;
-  padding: 2em;
+  padding-left : 2em;
+  padding-right : 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   /* border: 1em; */
 }
 
@@ -174,6 +177,24 @@ p{
   color: antiquewhite;
   justify-self:center;
   text-decoration: underline;
+}
+
+.resign{
+  opacity: 1;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  /* background: #001274; */
+}
+
+.resign-button{
+  font-size: .6em;
+  margin: 1em;  
+  padding: .5em;
+  background-color: #00505a8f;
+  border: 2px;
+  color: rgb(163, 163, 162);
+  justify-self:center;
 }
 
 .info{

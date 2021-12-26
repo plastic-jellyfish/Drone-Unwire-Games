@@ -22,6 +22,7 @@ let activePower=0;
 let font, font1;
 let overlay = document.querySelector('.overlay')
 let share = document.querySelector('.share')
+let resign = document.querySelector('.resign-button')
 let dShow=0,wShow=0;
 
 function preload() {
@@ -108,7 +109,7 @@ function _Drone() {
   removeElements()
   overlay.classList.remove('show')
   let title1 = document.getElementById('droneTitle')
-  title1.classList.add('show')
+  if(dShow ==0) title1.classList.add('show')
   let text1 = document.getElementById('droneText')
   if(dShow ==0) text1.classList.add('show')
   let press = document.querySelector('.Shoot')
@@ -124,6 +125,16 @@ function _Drone() {
   })
 
   _DroneFlag = 1;
+  resign.addEventListener('click' , () => {
+    removeElements()
+    title1.classList.remove('show')
+    text1.classList.remove('show')
+    bg1.classList.remove('wired')
+    _DroneFlag =0;
+    _WiredFlag =0;
+    console.log(_DroneFlag, _WiredFlag, score)
+  })
+
   background(10);
   buildings();
   let eye = map(dronex,0,width, width/2 - 50, width/2 + 50);
@@ -453,7 +464,7 @@ function _Wired() {
   removeElements()
   overlay.classList.remove('show')
   let title = document.getElementById('wiredTitle')
-  title.classList.add('show')
+  if(wShow == 0) title.classList.add('show')
   let text = document.getElementById('wiredText')
   if(wShow == 0) text.classList.add('show')
   let bg = document.querySelector('.parent')
@@ -468,6 +479,15 @@ function _Wired() {
 
   background(150);
   _WiredFlag = 1;
+
+  resign.addEventListener('click' , () => {
+    title.classList.remove('show')
+    text.classList.remove('show')
+    bg.classList.remove('wired')
+    _WiredFlag == 0;
+    _DroneFlag =0;
+    console.log(_DroneFlag, _WiredFlag, score)
+  })
   
   if (activePower>0) {
     for (let j =0 ; j<numPower;j++) {
