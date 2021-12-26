@@ -8,11 +8,29 @@ const gameName = process.env.GAMENAME;
 let url = 'https://dull-and-disorder.herokuapp.com/';
 // let url = 'http://localhost:5000/'
 const app = express()
-let userID ='';
-global.score = 0;
+let userID = null;
+let chatID = null;
+let msgID = null;
+// userID = 1029745540;
+// chatID = 1029745540;
+// msgID = 183;
 
+app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.static('public'))
+
+app.get('/', (req,res) => {
+  res.render('index')
+})
+
+app.put('/score', (req,res) => {
+  let score = req.body.score
+  res.json(req.body)
+  if (userID != null) { 
+    bot.setGameScore(userID,score,chatID,msgID); 
+  }
+  console.log(score)
+})
 
 // Matches /start
 bot.onText(/\/start/, function onPhotoText(msg) {
@@ -23,16 +41,10 @@ bot.onText(/\/start/, function onPhotoText(msg) {
 bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   bot.answerCallbackQuery(callbackQuery.id, {url: url, show_alert: true});
   userID = callbackQuery.from.id
-  console.log(userID);
-//   console.log(score);
+  chatID = callbackQuery.message.chat.id
+  msgID = callbackQuery.message.message_id
+  console.log(userID, chatID, msgID);
 });
-
-function setScore(){
-    bot.setGameScore(userID,score);
-    console.log(userID, score);
-}
-
-if (userID != '') setScore();
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This Game App"));
 

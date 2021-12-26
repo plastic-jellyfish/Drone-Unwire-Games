@@ -24,6 +24,8 @@ let overlay = document.querySelector('.overlay')
 let share = document.querySelector('.share')
 let resign = document.querySelector('.resign-button')
 let dShow=0,wShow=0;
+let score =0;
+let sendScore=0;
 
 function preload() {
     font = loadFont('assets/ZillaSlab-Regular.ttf');
@@ -82,6 +84,7 @@ function _Menu(){
     share.classList.remove('show')
     restartDrone();
     dShow=1;
+    sendScore=1;
     _Drone();
   })
 
@@ -97,6 +100,7 @@ function _Menu(){
     share.classList.remove('show')
     restartWired();
     wShow=1;
+    sendScore=1;
     _Wired();
   })
 }
@@ -137,6 +141,8 @@ function _Drone() {
     _DroneFlag =0;
     _WiredFlag =0;
     console.log(_DroneFlag, _WiredFlag, score)
+    setScore.call();
+    score = 0;
   })
 
   background(10);
@@ -214,6 +220,8 @@ function _Drone() {
     yes.mousePressed(() => {
       restartDrone();
       _Drone();
+      setScore.call();
+      score = 0;
     })
 
     let no = createButton('NO');
@@ -234,6 +242,8 @@ function _Drone() {
       resign.classList.remove('show')
       overlay.classList.add('show')
       _DroneFlag =0;
+      setScore.call();
+      score = 0;
     })
     // console.log(score)
   }
@@ -255,6 +265,14 @@ function _Drone() {
   stroke(0);
   strokeWeight(1);
   rect((width/2)-11, droney-32, (width/2)-11+105, droney-30+11,5);
+}
+
+function setScore(){
+  if(sendScore == 1){
+    let response = axios.put('/score',{score:score})
+    console.log('scoreSet', response)
+    sendScore=0;
+  }
 }
 
 function restartDrone() {
@@ -494,6 +512,8 @@ function _Wired() {
     _WiredFlag == 0;
     _DroneFlag =0;
     console.log(_DroneFlag, _WiredFlag, score)
+    setScore.call();
+    score = 0;
   })
   
   if (activePower>0) {
@@ -557,6 +577,8 @@ function _Wired() {
     yes.mousePressed(() => {
       restartWired();
       _Wired();
+      setScore.call();
+      score = 0;
     })
 
     let no = createButton('NO');
@@ -575,6 +597,8 @@ function _Wired() {
       bg.classList.remove('wired')
       resign.classList.remove('show')
       _WiredFlag =0;
+      setScore.call();
+      score = 0;
     })
   }
 }

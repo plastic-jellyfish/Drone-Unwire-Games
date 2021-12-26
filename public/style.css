@@ -230,7 +230,7 @@ p{
   bottom: 25%;
   border: 0;
   padding: 25px;
-  box-shadow: 10px 10px black;
+  box-shadow: 10px 10px rgba(0, 0, 0);
   color:black; 
   justify-self: center; 
   background-color: rgb(255, 255, 255);
