@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express')
 const path = require("path");
 const TelegramBot = require("node-telegram-bot-api");
+const { resolve } = require("path");
 const TOKEN = process.env.TOKEN;
 const bot = new TelegramBot(TOKEN, { polling: true } );
 const gameName = process.env.GAMENAME;
@@ -11,10 +12,15 @@ const app = express()
 let userID = null;
 let chatID = null;
 let msgID = null;
-let score = null;
-// userID = 1029745540;
+let score = 0;
+// userID = '1029745540';
 // chatID = 1029745540;
-// msgID = 183;
+// msgID = 244;
+var user ={
+  userID: null
+};
+
+user.userID = userID;
 
 app.set('view engine', 'ejs')
 app.use(express.json())
@@ -26,13 +32,11 @@ app.get('/', (req,res) => {
 
 app.put('/score', (req,res) => {
   score = req.body.score
-  res.json(req.body)
-  if (userID != null) { 
-    let scoreSet = bot.setGameScore(userID,score,chatID,msgID); 
-    bot.sendMessage(userID, "Score:"+ score)
-    // bot.sendMessage(userID, "Score:"+ scoreSet.game.title)
-  }
-  console.log(score)
+  // let SS = bot.setGameScore(userID,score,chatID,msgID); 
+  bot.sendMessage(userID, "Score:"+ score)
+  // bot.sendMessage(userID, "Score:"+ scoreSet.game.title)
+  // console.log(SS)
+  // res.json(req.body)
 })
 
 // Matches /start
@@ -51,9 +55,11 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This is a Game App"));
 bot.onText(/score/, (msg) =>{ 
-  // let highScore = bot.getGameHighScores(msg.from.id, msg.message.chat.id, msg.message.message_id)
-  bot.sendMessage(msg.from.id, "Score:"+score)
-  // bot.sendMessage(msg.from.id,"HighScore", {"position": highScore.position, "user": highScore.user, "score": highScore.score})
+    console.log(msg.from.id, msgID)
+    let res = bot.getGameHighScores(msg.from.id,chatID)
+    console.log(res)
+    bot.sendMessage(msg.from.id, "Score:"+score)
+    // bot.sendMessage(msg.from.id,"HighScoreTable", {"position": highScore.position, "user": highScore.user, "score": highScore.score})
 });
 
 app.listen(process.env.PORT || 5000)
