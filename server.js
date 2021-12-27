@@ -32,7 +32,7 @@ app.put('/score', (req,res) => {
     bot.sendMessage(userID, "Score:"+ score)
     // bot.sendMessage(userID, "Score:"+ scoreSet.game.title)
   }
-  console.log(score, scoreSet.game.title)
+  console.log(score)
 })
 
 // Matches /start
@@ -51,7 +51,7 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This is a Game App"));
 bot.onText(/score/, (msg) =>{ 
-  let highScore = bot.getGameHighScores(msg.from.id, msg.message.chat.id, msg.message.message_id)
+  // let highScore = bot.getGameHighScores(msg.from.id, msg.message.chat.id, msg.message.message_id)
   bot.sendMessage(msg.from.id, "Score:"+score)
   // bot.sendMessage(msg.from.id,"HighScore", {"position": highScore.position, "user": highScore.user, "score": highScore.score})
 });
