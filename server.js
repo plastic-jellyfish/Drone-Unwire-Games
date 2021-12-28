@@ -32,10 +32,10 @@ app.get('/', (req,res) => {
 
 app.put('/score', (req,res) => {
   score = req.body.score
-  // let SS = bot.setGameScore(userID,score,chatID,msgID); 
   bot.sendMessage(userID, "Score:"+ score)
+  let SS = bot.setGameScore(userID,score,chatID,msgID); 
   // bot.sendMessage(userID, "Score:"+ scoreSet.game.title)
-  // console.log(SS)
+  console.log(SS)
   // res.json(req.body)
 })
 
@@ -50,7 +50,9 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   userID = callbackQuery.from.id
   chatID = callbackQuery.message.chat.id
   msgID = callbackQuery.message.message_id
-  console.log(userID, chatID, msgID);
+  console.log(userID);
+  console.log(chatID);
+  console.log(msgID);
 });
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This is a Game App"));
