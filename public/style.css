@@ -187,15 +187,18 @@ p{
   /* background: #001274; */
 }
 
-.resign-button{
+.resign-button1,
+.resign-button2{
   display: none;
 }
 
-.resign-button.show{
+.resign-button1.show,
+.resign-button2.show{
   display: block;
 }
 
-.resign-button{
+.resign-button1,
+.resign-button2{
   font-size: .6em;
   margin: 1em;  
   padding: .5em;

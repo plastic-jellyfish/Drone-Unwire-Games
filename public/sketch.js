@@ -22,7 +22,8 @@ let activePower=0;
 let font, font1;
 let overlay = document.querySelector('.overlay')
 let share = document.querySelector('.share')
-let resign = document.querySelector('.resign-button')
+let resign1 = document.querySelector('.resign-button1')
+let resign2 = document.querySelector('.resign-button2')
 let dShow=0,wShow=0;
 let score =0;
 let sendScore=0;
@@ -116,7 +117,7 @@ function _Drone() {
   if(dShow ==0) title1.classList.add('show')
   let text1 = document.getElementById('droneText')
   if(dShow ==0) text1.classList.add('show')
-  if(dShow ==0) resign.classList.add('show')
+  if(dShow ==0) resign1.classList.add('show')
   let press = document.querySelector('.Shoot')
   if(dShow ==0) press.classList.add('show')
   let bg1 = document.querySelector('.parent')
@@ -130,13 +131,13 @@ function _Drone() {
   })
 
   _DroneFlag = 1;
-  resign.addEventListener('click' , () => {
+  resign1.addEventListener('click' , () => {
     removeElements()
     title1.classList.remove('show')
     text1.classList.remove('show')
     bg1.classList.remove('wired')
     press.classList.remove('show')
-    resign.classList.remove('show')
+    resign1.classList.remove('show')
     overlay.classList.add('show')
     _DroneFlag =0;
     _WiredFlag =0;
@@ -239,7 +240,7 @@ function _Drone() {
       text1.classList.remove('show')
       press.classList.remove('show')
       bg1.classList.remove('drone')
-      resign.classList.remove('show')
+      resign1.classList.remove('show')
       overlay.classList.add('show')
       _DroneFlag =0;
       setScore.call();
@@ -490,7 +491,7 @@ function _Wired() {
   if(wShow == 0) title.classList.add('show')
   let text = document.getElementById('wiredText')
   if(wShow == 0) text.classList.add('show')
-  if(wShow ==0) resign.classList.add('show')
+  if(wShow ==0) resign2.classList.add('show')
   let bg = document.querySelector('.parent')
   bg.classList.add('wired')
 
@@ -504,12 +505,12 @@ function _Wired() {
   background(150);
   _WiredFlag = 1;
 
-  resign.addEventListener('click' , () => {
+  resign2.addEventListener('click' , () => {
     title.classList.remove('show')
     text.classList.remove('show')
-    resign.classList.remove('show')
+    resign2.classList.remove('show')
     bg.classList.remove('wired')
-    _WiredFlag == 0;
+    _WiredFlag = 0;
     _DroneFlag =0;
     console.log(_DroneFlag, _WiredFlag, score)
     setScore.call();
@@ -595,7 +596,7 @@ function _Wired() {
       title.classList.remove('show')
       text.classList.remove('show')
       bg.classList.remove('wired')
-      resign.classList.remove('show')
+      resign2.classList.remove('show')
       _WiredFlag =0;
       setScore.call();
       score = 0;
