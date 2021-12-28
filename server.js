@@ -10,7 +10,7 @@ let url = 'https://dull-and-disorder.herokuapp.com/';
 // let url = 'http://localhost:5000/'
 const app = express()
 let userID = null;
-let chatID = null;
+let inlineID = null;
 let msgID = null;
 let score = 0;
 // userID = '1029745540';
@@ -30,14 +30,14 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.put('/score', async (req,res) => {
+app.put('/score', (req,res) => {
   score = req.body.score
   // bot.sendMessage(userID, "Score:"+ score)
   try{
-   let SS = await bot.setGameScore(userID,score,chatID,msgID); 
+   let SS = bot.setGameScore(userID,score,inlineID); 
    console.log(SS)
   } catch(e){
-    console.log("it Failed",e)  
+    console.log("setScore Failed",e)  
   }
 })
 
@@ -50,12 +50,15 @@ bot.onText(/\/start/, function onPhotoText(msg) {
 bot.on('callback_query', function onCallbackQuery(callbackQuery) {
   bot.answerCallbackQuery(callbackQuery.id, {url: url, show_alert: true});
   userID = callbackQuery.from.id
-  chatID = callbackQuery.message.chat.id
-  msgID = callbackQuery.message.message_id
+  inlineID = callbackQuery.inline_message_id
+  // msgID = callbackQuery.message.message_id
   console.log(userID);
-  console.log(chatID);
-  console.log(msgID);
+  console.log(inlineID);
+  // console.log(msgID);
+  // console.log(callbackQuery);
 });
+
+bot.on("polling_error", console.log);
 
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This is a Game App"));
 bot.onText(/score/, (msg) =>{ 
