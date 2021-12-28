@@ -30,13 +30,15 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.put('/score', (req,res) => {
+app.put('/score', async (req,res) => {
   score = req.body.score
-  bot.sendMessage(userID, "Score:"+ score)
-  let SS = bot.setGameScore(userID,score,chatID,msgID); 
-  // bot.sendMessage(userID, "Score:"+ scoreSet.game.title)
-  console.log(SS)
-  // res.json(req.body)
+  // bot.sendMessage(userID, "Score:"+ score)
+  try{
+   let SS = await bot.setGameScore(userID,score,chatID,msgID); 
+   console.log(SS)
+  } catch(e){
+    console.log("it Failed",e)  
+  }
 })
 
 // Matches /start
