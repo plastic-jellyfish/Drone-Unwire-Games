@@ -59,7 +59,11 @@ app.put('/score', async (req,res) => {
   try{
     await bot.telegram.setGameScore(userID,score,inlineID, chatID, msgID); 
   } catch(e){
-    console.log("Set Score Error",e)
+    if(e.response.error_code === 400){
+      console.log("Error_code 400 Score not modified")
+    } else {
+      console.log("Unknown error",e)
+    }
     logger.error("Cheese is too ripe! Set Score Error",e);
   }
   // bot.telegram.sendMessage(userID, "Score:"+ score)
