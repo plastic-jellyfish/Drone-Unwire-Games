@@ -1,26 +1,24 @@
 require("dotenv").config();
 const express = require('express')
 const path = require("path");
-const TelegramBot = require("node-telegram-bot-api");
+const { Telegraf, Markup } = require('telegraf')
 const { resolve } = require("path");
 const TOKEN = process.env.TOKEN;
-const bot = new TelegramBot(TOKEN, { polling: true } );
+const bot = new Telegraf(TOKEN)
 const gameName = process.env.GAMENAME;
 let url = 'https://dull-and-disorder.herokuapp.com/';
 // let url = 'http://localhost:5000/'
 const app = express()
-let userID = null;
-let inlineID = null;
-let msgID = null;
+let userID = undefined;
+let inlineID = undefined;
+let msgID = undefined;
+let chatID = undefined;
 let score = 0;
-// userID = '1029745540';
-// chatID = 1029745540;
-// msgID = 244;
-var user ={
-  userID: null
-};
 
-user.userID = userID;
+const markup = Markup.inlineKeyboard([
+  Markup.button.game('🎮 Play now!'),
+  Markup.button.url('Telegraf help', 'http://telegraf.js.org')
+])
 
 app.set('view engine', 'ejs')
 app.use(express.json())
@@ -30,44 +28,41 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.put('/score', (req,res) => {
-  score = req.body.score
-  console.log(score)
-  // bot.sendMessage(userID, "Score:"+ score)
-  // try{
-  //  let SS = bot.setGameScore(userID,score,userID,inlineID); 
-  //  console.log(SS)
-  // } catch(e){
-  //   console.log("setScore Failed",e)  
-  // }
+bot.start((ctx) => ctx.replyWithGame(gameName))
+bot.command('foo', (ctx) => ctx.replyWithGame(gameName, markup))
+bot.command('help', (ctx) => ctx.reply('This is Game Bot!'))
+bot.gameQuery((ctx) => {
+  userID = ctx.callbackQuery.from.id;
+  inlineID = ctx.callbackQuery.inline_message_id;
+  if(ctx.callbackQuery.message){
+    msgID = ctx.callbackQuery.message.message_id
+    chatID = ctx.callbackQuery.message.chat.id
+  }
+  console.log('user_id:'+userID+', inline_id:'+inlineID+', message_id:'+msgID+ ', chat_id:'+chatID );
+  ctx.answerGameQuery(url)
 })
 
-// Matches /start
-bot.onText(/\/start/, function onPhotoText(msg) {
-    bot.sendGame(msg.chat.id, gameName);
-});
-  
-// Handle callback queries
-bot.on('callback_query', function onCallbackQuery(callbackQuery) {
-  bot.answerCallbackQuery(callbackQuery.id, {url: url, show_alert: true});
-  userID = callbackQuery.from.id
-  inlineID = callbackQuery.inline_message_id
-  // msgID = callbackQuery.message.message_id
-  console.log(userID);
-  console.log(inlineID);
-  // console.log(msgID);
-  // console.log(callbackQuery);
-});
+app.put('/score', async (req,res) => {
+  score = req.body.score
+  try{
+    await bot.telegram.setGameScore(userID,score,inlineID, chatID, msgID); 
+  } catch(e){
+    console.log("Set Score Error",e)
+  }
+  // bot.telegram.sendMessage(userID, "Score:"+ score)
+  console.log(score)
+})
 
-bot.on("polling_error", console.log);
+// bot.command('score', async (ctx) => {
+//   ctx.reply('HighScoreTable:')
+//   let highScore = await bot.telegram.getGameHighScores(userID,inlineID, chatID, msgID);
+//   console.log(highScore.position)
+//   console.log(highScore.score)
+//   // ctx.reply("HighScoreTable:"+"position:"+ highScore.position + "user:"+ highScore.user.first_name + "score:" + highScore.score)
+// });
 
-bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This is a Game App"));
-bot.onText(/score/, (msg) =>{ 
-    console.log(msg.from.id, msgID)
-    let res = bot.getGameHighScores(msg.from.id,chatID)
-    console.log(res)
-    bot.sendMessage(msg.from.id, "Score:"+score)
-    // bot.sendMessage(msg.from.id,"HighScoreTable", {"position": highScore.position, "user": highScore.user, "score": highScore.score})
-});
-
+bot.launch()
 app.listen(process.env.PORT || 5000)
+
+process.once('SIGINT', () => bot.stop('SIGINT'))
+process.once('SIGTERM', () => bot.stop('SIGTERM'))
