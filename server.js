@@ -32,13 +32,14 @@ app.get('/', (req,res) => {
 
 app.put('/score', (req,res) => {
   score = req.body.score
+  console.log(score)
   // bot.sendMessage(userID, "Score:"+ score)
-  try{
-   let SS = bot.setGameScore(userID,score,inlineID); 
-   console.log(SS)
-  } catch(e){
-    console.log("setScore Failed",e)  
-  }
+  // try{
+  //  let SS = bot.setGameScore(userID,score,userID,inlineID); 
+  //  console.log(SS)
+  // } catch(e){
+  //   console.log("setScore Failed",e)  
+  // }
 })
 
 // Matches /start
