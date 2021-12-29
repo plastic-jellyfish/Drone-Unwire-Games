@@ -36,7 +36,8 @@ bot.command('foo', (ctx) => ctx.replyWithGame(gameName, markup))
 bot.command('help', (ctx) => ctx.reply('This is Game Bot!'))
 bot.gameQuery(async (ctx) => {
   userID = ctx.callbackQuery.from.id;
-  userName = ctx.callbackQuery.from.first_name;
+  userName = ctx.callbackQuery.from.first_name +" @"+ ctx.callbackQuery.from.username;
+  // console.log(ctx.callbackQuery.from)
   inlineID = ctx.callbackQuery.inline_message_id;
   if(ctx.callbackQuery.message){
     msgID = ctx.callbackQuery.message.message_id
@@ -46,10 +47,9 @@ bot.gameQuery(async (ctx) => {
     msgID=undefined
     chatID=undefined
   }
-  console.log('user_id:'+userID+', inline_id:'+inlineID+', message_id:'+msgID+ ', chat_id:'+chatID );
   ctx.answerGameQuery(url)
   await highScore();
-  console.log("HighScore of "+ userName+":" + highScoreCurrUser)
+  console.log(userName+"::Highscore:" + highScoreCurrUser+'|user_id:'+userID+'|inline_id:'+inlineID+'|message_id:'+msgID+ '|chat_id:'+chatID)
 })
 
 app.put('/score', async (req,res) => {
@@ -57,7 +57,7 @@ app.put('/score', async (req,res) => {
   if(score > highScoreCurrUser){
     try{
       await bot.telegram.setGameScore(userID,score,inlineID, chatID, msgID); 
-      console.log("Current_Score:"+ score +" > previous high score:"+highScoreCurrUser+" New Score updated.")
+      console.log("Current_Score:"+ score +" > Previous_HighScore:"+highScoreCurrUser+" New_Score_Updated.")
     } catch(e){
       if(e.response.description === 'Bad Request: BOT_SCORE_NOT_MODIFIED'){
         console.log("Error_code 400::Current Score less than High Score::Bad Request: BOT_SCORE_NOT_MODIFIED")
@@ -65,7 +65,7 @@ app.put('/score', async (req,res) => {
         console.log("Unknown error",e)
       }
     }
-  } else {console.log("Current Score:"+ score +" < previous high score:"+highScoreCurrUser+" New Score NOT updated.");}
+  } else {console.log("Current_Score:"+ score +" < Previous_HighScore:"+highScoreCurrUser+" New_Score_NOT_updated.");}
 })
 
 async function highScore(){
