@@ -544,7 +544,7 @@ function _Wired() {
   background(150);
   _WiredFlag = 1;
   scr.innerText = 'SCORE [ '+score +' ]'
-  
+
   resign2.addEventListener('click' , () => {
     title.classList.remove('show')
     text.classList.remove('show')
@@ -801,6 +801,7 @@ class Power {
 
       if ((_peopleYellow[sc].wired)==0) {
         _peopleYellow[sc].wired=1;
+        if(score>0) score -= 1;
       }
 
       sc=sc+1;
@@ -864,11 +865,12 @@ class Power {
       noStroke();
       textSize(18);
       textAlign(CENTER,CENTER);
-      text(int(((120*totalTime)/1000)-(passedTime2/1000)), this.px, this.py);
-      if (passedTime2 > (120*totalTime)) {
+      text(int(((recoverFactor*totalTime)/1000)-(passedTime2/1000)), this.px, this.py);
+      if (passedTime2 > (recoverFactor*totalTime)) {
         this.plife=1;
         this.strength=4;
         activePower = activePower + 1;
+        if(score>0) score -= 10
       }
     }
   }
