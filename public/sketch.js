@@ -24,9 +24,15 @@ let overlay = document.querySelector('.overlay')
 let share = document.querySelector('.share')
 let resign1 = document.querySelector('.resign-button1')
 let resign2 = document.querySelector('.resign-button2')
+let scoreDiv = document.querySelector('.scoreDiv')
+let notification = document.querySelector('.notification')
+let notify1 = document.getElementById('notify1')
+let notify2 = document.getElementById('notify2')
+let scr = document.getElementById('score')
 let dShow=0,wShow=0;
 let score =0;
 let sendScore=0;
+
 
 function preload() {
     font = loadFont('assets/ZillaSlab-Regular.ttf');
@@ -37,8 +43,8 @@ function preload() {
 }
 
 function setup() {
-  var drone = createCanvas(_width,_height);  
-  drone.parent('drone');
+  var games = createCanvas(_width,_height);  
+  games.parent('games');
   // console.log(score);
 }
 
@@ -70,6 +76,7 @@ function draw() {
 //******************************************************************************************//
 
 function _Menu(){
+  score =0;
   removeElements()
   overlay.classList.add('show')
   share.classList.add('show')
@@ -118,6 +125,8 @@ function _Drone() {
   let text1 = document.getElementById('droneText')
   if(dShow ==0) text1.classList.add('show')
   if(dShow ==0) resign1.classList.add('show')
+  if(dShow ==0) notification.classList.add('show')
+  if(dShow ==0) scoreDiv.classList.add('show')
   let press = document.querySelector('.Shoot')
   if(dShow ==0) press.classList.add('show')
   let bg1 = document.querySelector('.parent')
@@ -138,15 +147,19 @@ function _Drone() {
     bg1.classList.remove('wired')
     press.classList.remove('show')
     resign1.classList.remove('show')
+    notification.classList.remove('show')
+    scoreDiv.classList.remove('show')
     overlay.classList.add('show')
     _DroneFlag =0;
     _WiredFlag =0;
-    console.log(_DroneFlag, _WiredFlag, score)
+    // console.log(_DroneFlag, _WiredFlag, score)
     setScore.call();
     score = 0;
   })
 
   background(10);
+  scr.innerText = '[ '+score +' ] CREDITS'
+  _notify();
   buildings();
   let eye = map(dronex,0,width, width/2 - 50, width/2 + 50);
   fill(255);
@@ -199,7 +212,8 @@ function _Drone() {
   if (fear>=100) {
     overlay.classList.add('show')
     dOverlay.classList.remove('show')
-    let reset = createP('Dull Day & Fine Job! You killed '+devkill+' Deviants & '+civilian+' Civilians today.\n Continue working Next Shift?');
+    notification.classList.remove('show')
+    let reset = createP('Dull Day & Fine Job! You killed '+devkill+' Deviants & '+civilian+' Civilians today.Your Earned '+ score +' Credits. Continue working Next Shift?');
     reset.style('background','#0050ff')
     reset.style('font-size','20px')
     reset.style('border','0')
@@ -214,7 +228,7 @@ function _Drone() {
     yes.style('font-size','20px')
     yes.style('border','0')
     yes.style('padding','25px')
-    yes.position(_width/2-50, _height/2)
+    yes.position(_width/2-50, _height/2+25)
     yes.style('width','100px')
     // yes.style('height','400px')
     yes.style('box-shadow', '2px 2px #000')
@@ -230,7 +244,7 @@ function _Drone() {
     no.style('font-size','20px')
     no.style('border','0')
     no.style('padding','25px')
-    no.position(_width/2-50, _height/2+100)
+    no.position(_width/2-50, _height/2+125)
     no.style('width','100px')
     // yes.style('height','400px')
     no.style('box-shadow', '2px 2px #000')
@@ -241,6 +255,8 @@ function _Drone() {
       press.classList.remove('show')
       bg1.classList.remove('drone')
       resign1.classList.remove('show')
+      notification.classList.remove('show')
+      scoreDiv.classList.remove('show')
       overlay.classList.add('show')
       _DroneFlag =0;
       setScore.call();
@@ -266,6 +282,23 @@ function _Drone() {
   stroke(0);
   strokeWeight(1);
   rect((width/2)-11, droney-32, (width/2)-11+105, droney-30+11,5);
+}
+
+function _notify(){
+  if (civilian >= 2 && civilian < 5) {notify1.innerText = 'You killed civilians. You might get into trouble.'; notification.style.backgroundColor = "#0584d84d"; }
+  if (civilian >= 5 && civilian < 10) {notify1.innerText = 'You killed '+ civilian +' civilians. This is getting Media attention.'; notification.style.backgroundColor = "#0805d84d";}
+  if (civilian >= 10 && civilian < 15) {notify1.innerText = 'You are now trending in social media #stopdronekillings'; notification.style.backgroundColor = "#7905d84d";}
+  if (civilian >= 15 && civilian < 20) {notify1.innerText = 'Protests have started against you.'; notification.style.backgroundColor = "#d805cd4d";}
+  if (civilian >= 20 && civilian < 25) {notify1.innerText = 'You are Boss is worried for getting attention. Be prepared to answer your Boss.'; notification.style.backgroundColor = "#f506694d";}
+  if (civilian >= 25 && civilian < 30) {notify1.innerText = '"Hey Can you Keep LowProfile at work"--Manager '; notification.style.backgroundColor = "#f5061a5b"; }
+  if (civilian >= 30 && civilian < 35) {notify1.innerText = 'Can you shut the music and pay attention at work. This is becoming a sensation.'; notification.style.backgroundColor = "#f536065b";}
+  if (civilian >= 35 && civilian < 40) {notify1.innerText = ' "Protestors are at our house. Be prepared to face them on your way back."-- Housemate '; notification.style.backgroundColor = "#f5720667";}
+  if (civilian >= 40 && civilian < 45) {notify1.innerText = ' "Dont go on like this. You got to work tomorrow."-- Work friend'; notification.style.backgroundColor = "#f506e967";}
+  if (civilian >= 45 && civilian < 100) {notify1.innerText = ' "You are on killing spree. Why dont you quit today and come back later"--Manager '; notification.style.backgroundColor = "#f5060667";}
+
+  if (fear >= 20 && devkill < 5) {notify2.innerText = 'Email: "You have killed only '+devkill+' deviants. When are you planning to start your work?" ';}
+  if (fear >= 40 && devkill < 10) {notify2.innerText = 'Email: "Your performance is very low. You will have to sit for enquiry" '; }
+  if (fear >= 60 && devkill < 15) {notify2.innerText = 'Email: "You are underperforming. Come and meet us after work" '; }
 }
 
 function setScore(){
@@ -295,6 +328,9 @@ function restartDrone() {
   textSize(12);
   fear = 0;
   rectMode(CORNERS);
+  notify1.innerText = 'People are protesting against the Drone Operators. You might lose your job soon.'; 
+  notify2.innerText = 'Email:"Perform at your job if you expect a pay raise" '; 
+  notification.style.backgroundColor = "#059cd84d"; 
 
   // _people = new People[numPeople];
   for (let i=0; i<numPeople; i++) {
@@ -441,6 +477,7 @@ function drone() {
           }
           else if ((_people[i].deviant == 0) && (_people[i].life==1)) {
             civilian=civilian+1;
+            if(score > 0 && civilian > 10) score -=1;
             fear=fear+1;
           }
           _people[i].kill();
@@ -466,6 +503,7 @@ function drone() {
             }
             else if ((_people[i].deviant == 0) && (_people[i].life==1)) {
               civilian=civilian+1;
+              if(score > 0 && civilian > 10) score -=1;
               score +=1;
               fear=fear+1;
             }
@@ -492,6 +530,7 @@ function _Wired() {
   let text = document.getElementById('wiredText')
   if(wShow == 0) text.classList.add('show')
   if(wShow ==0) resign2.classList.add('show')
+  if(wShow ==0) scoreDiv.classList.add('show')
   let bg = document.querySelector('.parent')
   bg.classList.add('wired')
 
@@ -504,11 +543,13 @@ function _Wired() {
 
   background(150);
   _WiredFlag = 1;
-
+  scr.innerText = 'SCORE [ '+score +' ]'
+  
   resign2.addEventListener('click' , () => {
     title.classList.remove('show')
     text.classList.remove('show')
     resign2.classList.remove('show')
+    scoreDiv.classList.remove('show')
     bg.classList.remove('wired')
     _WiredFlag = 0;
     _DroneFlag =0;
@@ -524,7 +565,7 @@ function _Wired() {
       if (_power[j].plife==1) {
         _power[j].scan();
       }
-      _power[j].recover();
+      _power[j].recover(j);
     }
 
     for (let i =0 ; i<numYellow;i++) {
@@ -556,7 +597,7 @@ function _Wired() {
 
     overlay.classList.add('show')
     wOverlay.classList.remove('show')
-    let reset = createP('Good Job! The Red Circles are destructed and you have unwired all the Yellows. Want to Un-wire more?');
+    let reset = createP('Good Job! The Red Circles are destructed and you have unwired all the Yellows. You made '+ score +' points. Want to Un-wire more?');
     reset.style('background','#0050ff')
     reset.style('font-size','20px')
     reset.style('border','0')
@@ -571,7 +612,7 @@ function _Wired() {
     yes.style('font-size','20px')
     yes.style('border','0')
     yes.style('padding','25px')
-    yes.position(_width/2-50, _height/2)
+    yes.position(_width/2-50, _height/2+25)
     yes.style('width','100px')
     // yes.style('height','400px')
     yes.style('box-shadow', '2px 2px #000')
@@ -587,7 +628,7 @@ function _Wired() {
     no.style('font-size','20px')
     no.style('border','0')
     no.style('padding','25px')
-    no.position(_width/2-50, _height/2+100)
+    no.position(_width/2-50, _height/2+125)
     no.style('width','100px')
     // yes.style('height','400px')
     no.style('box-shadow', '2px 2px #000')
@@ -597,6 +638,7 @@ function _Wired() {
       text.classList.remove('show')
       bg.classList.remove('wired')
       resign2.classList.remove('show')
+      scoreDiv.classList.remove('show')
       _WiredFlag =0;
       setScore.call();
       score = 0;
@@ -645,7 +687,7 @@ class PeopleYellow {
   }
 
   move() {
-    if ((this.wired==1) ||((this.wired==0)&&(this.activePower==0))) {
+    if ((this.wired==1) ||((this.wired==0)&&(activePower==0))) {
       if ((this.x>(mouseX-10))&&(this.x<(mouseX+10))&&(this.y>(mouseY-10))&&(this.y<(mouseY+10))) {
         this.talk();
         let passedTime = millis() - savedTime;
@@ -747,9 +789,15 @@ class Power {
   }
 
   scan()
-  {
+  { let scanFactor = 1;
+    if(activePower == 5 ) scanFactor = 1;
+    if(activePower == 4 ) scanFactor = 1;
+    if(activePower == 3 ) scanFactor = 0.9;
+    if(activePower == 2 ) scanFactor = 0.85;
+    if(activePower == 1 ) scanFactor = 0.8;
+    
     let passedTime1 = millis() - savedTime1;
-    if (passedTime1 > (1*totalTime)) {
+    if (passedTime1 > (scanFactor*totalTime)) {
 
       if ((_peopleYellow[sc].wired)==0) {
         _peopleYellow[sc].wired=1;
@@ -802,7 +850,14 @@ class Power {
     }
   }
 
-  recover() {
+  recover(j) {
+    let recoverFactor = 120;
+    if(j == 0 ) recoverFactor = 120;
+    if(j == 1 ) recoverFactor = 100;
+    if(j == 2 ) recoverFactor = 90;
+    if(j == 3 ) recoverFactor = 80;
+    if(j == 4 ) recoverFactor = 60;
+
     if (this.plife==0) {
       let passedTime2 = millis() - this.recoverTime;
       fill(0);
@@ -813,7 +868,7 @@ class Power {
       if (passedTime2 > (120*totalTime)) {
         this.plife=1;
         this.strength=4;
-        this.activePower=this.activePower+1;
+        activePower = activePower + 1;
       }
     }
   }

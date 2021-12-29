@@ -2,6 +2,8 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #000;  
+  width: 100vw;
+  height: 100vh;
 }
 
 .parent{
@@ -182,30 +184,99 @@ p{
 .resign{
   opacity: 1;
   position: absolute;
-  bottom: 5%;
-  right: 5%;
+  bottom: 5vh;
+  right: 0;
   /* background: #001274; */
 }
 
+.scoreDiv{
+  opacity: 1;
+  position: absolute;
+  bottom: 5vh;
+  left: 0;
+  /* background: #001274; */
+}
+
+#score{
+  font-size: 1em;
+  /* margin: 1em;   */
+  padding: .5em;
+  background-color: #00505a8f;
+  /* border: 2px; */
+  color: #cecece;
+  /* justify-self:center; */
+}
+
+.notification{
+  opacity: 1;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  width: 40vw;
+  height: 10vh;
+  left: 0;
+  background-color: #059cd84d;
+  color: #f5060667;
+  display: grid;
+  justify-items: center;
+  overflow: hidden;
+  border-radius: 2px;
+  margin: .5em;
+  padding: .5em;
+}
+
+#notify1{
+  width: 100%;
+  height: 100%;
+  /* transform: translateX(100%); */
+  animation: scroll-up 5s linear infinite;
+  justify-items: center;
+  color: rgba(150, 245, 72, 0.5);
+}
+
+#notify2{
+  width: 100%;
+  height: 100%;
+  /* transform: translateX(100%); */
+  animation: scroll-up 5s linear infinite;
+  justify-items: center;
+  font-family: "kanit light";
+  color: rgba(253, 253, 197, 0.808);
+}
+
+@keyframes scroll-up {
+  0% {
+      transform: translateY(100%);
+  }
+  100% {
+      transform: translateY(-200%);
+  }
+}
+
+.notification,
+.scoreDiv,
 .resign-button1,
 .resign-button2{
   display: none;
 }
 
+.notification.show,
+.scoreDiv.show,
 .resign-button1.show,
 .resign-button2.show{
-  display: block;
+  display: inherit;
 }
 
 .resign-button1,
 .resign-button2{
-  font-size: .6em;
-  margin: 1em;  
+  font-size: .8em;
+  /* margin: 1em;  */
   padding: .5em;
   background-color: #00505a8f;
   border: 2px;
-  color: rgb(163, 163, 162);
-  justify-self:center;
+  color: #cecece;
+  text-decoration: underline;
+  /* justify-self:center; */
 }
 
 .info{
@@ -246,6 +317,54 @@ p{
 
 .share.show{
   display: block;
+}
+
+.shareOverlay{
+  opacity: 1;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.5);
+}
+
+.sharePanel{
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 30%;
+  margin: auto;
+  width: 40%;
+  z-index: 2;
+  padding: 2em;
+  background: #001274;
+  box-shadow: 10px 10px black;
+}
+
+#shareURL{
+  font-family: "kanit light";
+  font-size: 1.2em;
+  color:antiquewhite;
+}
+
+#url{
+  font-family: "kanit light";
+  font-size: 1.2em;
+  color:antiquewhite;
+  text-decoration: underline;
+} 
+
+.shareOverlay,
+.sharePanel{
+  display: none;
+}
+
+.shareOverlay.show,
+.sharePanel.show{
+  display: grid;
+  justify-items: center;
 }
 
 .loader-wrapper{
@@ -323,3 +442,4 @@ p{
     height: 0%;
   }
 }
+

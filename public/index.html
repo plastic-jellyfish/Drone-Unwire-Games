@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drone_UnWire-Game</title>
+    <title>Dull-n-Disordered--Game</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Zilla Slab">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
             and destruct all the Reds before the time runs out.
           </p>
         </div>
-        <div class="child container2" id="drone"></div>
+        <div class="child container2" id="games"></div>
         <div class="child container3">
           <!-- <button class="Left btn"><i class="fas fa-angle-left"></i></button> -->
           <button class="Shoot btn"><i class="fas fa-flushed"></i></button>
@@ -37,6 +37,7 @@
     </div>
     <div class ="resign"><button class="resign-button1">[ I am tired ]</button></div>
     <div class ="resign"><button class="resign-button2">[ I am tired ]</button></div>
+    <div class ="scoreDiv"><p id="score">-</p></div>
     <div class="overlay">
       <!-- <h2 class="mood">Two Moods of the Day</h2> -->
       <p class="info">Made with P5.JS+HTML+CSS<br>Inspired by Molleindustria.org</p>
@@ -57,6 +58,10 @@
         and destruct all the Reds before the time runs out. All the Best!
       </p>
       <button class="start">[ Start Un-Wiring ]</button>
+    </div>
+    <div class="notification">
+      <p id="notify1">-</p>
+      <p id="notify2">-</p>
     </div>
     <div class="loader-wrapper">
       <span class="loader"><span class="loader-inner"></span></span>

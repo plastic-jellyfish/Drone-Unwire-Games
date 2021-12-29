@@ -37,7 +37,6 @@ bot.command('help', (ctx) => ctx.reply('This is Game Bot!'))
 bot.gameQuery(async (ctx) => {
   userID = ctx.callbackQuery.from.id;
   userName = ctx.callbackQuery.from.first_name +" @"+ ctx.callbackQuery.from.username;
-  // console.log(ctx.callbackQuery.from)
   inlineID = ctx.callbackQuery.inline_message_id;
   if(ctx.callbackQuery.message){
     msgID = ctx.callbackQuery.message.message_id
@@ -54,18 +53,21 @@ bot.gameQuery(async (ctx) => {
 
 app.put('/score', async (req,res) => {
   score = req.body.score
-  if(score > highScoreCurrUser){
+  // if(score > highScoreCurrUser){
     try{
       await bot.telegram.setGameScore(userID,score,inlineID, chatID, msgID); 
-      console.log("Current_Score:"+ score +" > Previous_HighScore:"+highScoreCurrUser+" New_Score_Updated.")
+      console.log("Current_Score:"+ score +"|| Previous_HighScore:"+highScoreCurrUser+"|| New_Score_Updated.")
     } catch(e){
       if(e.response.description === 'Bad Request: BOT_SCORE_NOT_MODIFIED'){
         console.log("Error_code 400::Current Score less than High Score::Bad Request: BOT_SCORE_NOT_MODIFIED")
-      } else {
+      }  else if(e.response.description === 'Bad Request: invalid user_id specified'){
+        console.log("Error_code 400::Website User::Bad Request: invalid user_id specified")
+      }
+      else {
         console.log("Unknown error",e)
       }
     }
-  } else {console.log("Current_Score:"+ score +" < Previous_HighScore:"+highScoreCurrUser+" New_Score_NOT_updated.");}
+  // } else {console.log("Current_Score:"+ score +" < Previous_HighScore:"+highScoreCurrUser+" New_Score_NOT_updated.");}
 })
 
 async function highScore(){
