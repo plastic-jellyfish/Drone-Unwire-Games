@@ -19,8 +19,9 @@ let score = 0;
 let highScoreCurrUser = 0;
 
 const markup = Markup.inlineKeyboard([
-  Markup.button.game('🎮 Play now!'),
-  Markup.button.url('Telegraf help', 'http://telegraf.js.org')
+  // Markup.button.game('🧟 ✈️  Play now!  🛠️ 🌵'),
+  Markup.button.game('~~~ 🧟  Play now!  ~~~'),
+  // Markup.button.url('Telegraf help', 'http://telegraf.js.org')
 ])
 
 app.set('view engine', 'ejs')
@@ -31,7 +32,7 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-bot.start((ctx) => ctx.replyWithGame(gameName))
+bot.start((ctx) => ctx.replyWithGame(gameName, markup))
 bot.command('foo', (ctx) => ctx.replyWithGame(gameName, markup))
 bot.command('help', (ctx) => ctx.reply('This is Game Bot!'))
 bot.gameQuery(async (ctx) => {
