@@ -5,13 +5,17 @@
 Made with P5.JS + HTML + CSS  + TELEGRAF.JS + NODEJS
 
 =================
+
 git Clone
 
 npm i
 
 Create .env file. 
+
 Add 
+
 TOKEN = [YOUR_BOT_API_ TOKEN]
+
 GAMENAME = [YOUR_GAME_SHORTNAME]
 
 =================
