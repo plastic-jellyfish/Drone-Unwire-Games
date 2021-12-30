@@ -6,6 +6,14 @@ Made with P5.JS + HTML + CSS  + TELEGRAF.JS + NODEJS
 
 =================
 
+BOT NAME: dull-n-disordered
+
+USER NAME: @disorderedbot
+
+GAME NAME: Dull-n-Disordered
+
+=================
+
 git Clone
 
 npm i
